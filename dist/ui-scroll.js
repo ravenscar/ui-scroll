@@ -1,7 +1,7 @@
 /*!
  * angular-ui-scroll
  * https://github.com/angular-ui/ui-scroll.git
- * Version: 1.4.1 -- 2016-05-16T21:48:23.723Z
+ * Version: 1.4.1 -- 2016-05-17T08:17:23.199Z
  * License: MIT
  */
  
@@ -804,6 +804,10 @@ angular.module('ui.scroll', []).directive('uiScrollViewport', function () {
 
       // We need the item bindings to be processed before we can do adjustment
       $timeout(function () {
+        if (rid && rid !== ridActual || $scope.$$destroyed) {
+          return;
+        }
+
         updatePaddings(rid, updates);
         enqueueFetch(rid, true);
 
@@ -820,6 +824,10 @@ angular.module('ui.scroll', []).directive('uiScrollViewport', function () {
 
       // We need the item bindings to be processed before we can do adjustment
       $timeout(function () {
+        if (rid && rid !== ridActual || $scope.$$destroyed) {
+          return;
+        }
+
         enqueueFetch(rid, updatePaddings(rid, updates));
         pending.shift();
 
